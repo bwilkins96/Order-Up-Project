@@ -2,4 +2,63 @@
 
 {% block content %}
 <h1>Order Up!</h1>
+<nav>
+    <a href="/assign">Assign Employee</a>
+    <a href="/close">Close Table</a>
+    <a href="/order">Add Order</a>
+</nav>
+<div>
+    <h2>Tables</h2>
+    {% for table in tables %}
+    <div>
+        Number:
+        {{table.number}}
+    </div>
+    <div>
+        Capacity:
+        {{table.capacity}}
+    </div>
+    <div>
+        Open:
+        {{table.open}}
+    </div>
+    <div>
+        Employee:
+        {{table.employee.name}}
+    </div>
+    <div>-----------</div>
+    {% endfor %}
+</div>
+
+<div>
+    <h2>Employees</h2>
+    {% for employee in employees %}
+    <div>
+        {{ employee.name }}
+    </div>
+    <div>
+        {{ employee.employee_number }}
+    </div>
+    <div>-----------</div>
+    {% endfor %}
+</div>
+
+<div>
+    <h2>Menu</h2>
+    {% for item in menu_items %}
+    <div>{{ item.name }}</div>
+    <div>{{ item.price }}</div>
+    <div>-----------</div>
+    {% endfor %}
+</div>
+
+<div>
+    <h2>Order Details</h2>
+    {% for d in order_details %}
+        {{ d.order_id }}
+        {{ d.menu_item.name }}
+        <div>-----------</div>
+    {% endfor %}
+</div>
+
 {% endblock %}

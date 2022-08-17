@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Order Up!</h1>
+<nav>
+    <a href="/assign">Assign Employee</a>
+    <a href="/">Home</a>
+    <a href="/order">Add Order</a>
+</nav>
+
+<form method="POST" action="/close" >
+    {{ close.csrf_token }}
+    <h2>Close Table</h2>
+    <div>
+        {{ close.table_number.label }}
+        {{ close.table_number }}
+
+        {% if close.table_number.errors %}
+            <ul>
+                {% for error in close.table_number.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    <div>
+        {{ close.submit }}
+    </div>
+</form>
+
+{% endblock %}

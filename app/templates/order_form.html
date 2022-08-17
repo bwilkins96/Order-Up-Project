@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Order Up!</h1>
+<nav>
+    <a href="/assign">Assign Employee</a>
+    <a href="/close">Close Table</a>
+    <a href="/">Home</a>
+</nav>
+
+<form method="POST" action="/order" >
+    {{ order.csrf_token }}
+    <h2>Add Order</h2>
+    <div>
+        {{ order.food_id.label }}
+        {{ order.food_id }}
+
+        {% if order.food_id.errors %}
+            <ul>
+                {% for error in order.food_id.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    <div>
+        {{ order.order_id.label }}
+        {{ order.order_id }}
+
+        {% if order.order_id.errors %}
+            <ul>
+                {% for error in order.order_id.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    <div>
+        {{ order.table_number.label }}
+        {{ order.table_number }}
+
+        {% if order.table_number.errors %}
+            <ul>
+                {% for error in order.table_number.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    <div>
+        {{ order.submit }}
+    </div>
+</form>
+
+{% endblock %}

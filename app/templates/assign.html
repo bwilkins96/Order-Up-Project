@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Order Up!</h1>
+
+<nav>
+    <a href="/">Home</a>
+    <a href="/close">Close Table</a>
+    <a href="/order">Add Order</a>
+</nav>
+
+
+<form method="POST" action="/assign" >
+    {{ assign.csrf_token }}
+    <h2>Assign Employee</h2>
+    <div>
+        {{ assign.employee_number.label }}
+        {{ assign.employee_number }}
+
+        {% if assign.employee_number.errors %}
+            <ul>
+                {% for error in assign.employee_number.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    <div>
+        {{ assign.table_number.label }}
+        {{ assign.table_number }}
+
+        {% if assign.table_number.errors %}
+            <ul>
+                {% for error in assign.table_number.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    <div>{{ assign.submit }}</div>
+</form>
+
+{% endblock %}
