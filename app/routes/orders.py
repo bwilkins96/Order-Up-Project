@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect
+from flask import Blueprint, render_template
 from flask_login import login_required
 from app.models import Employee, Menu, MenuItem, Table, Order, OrderDetail
 from app.forms import AssignForm, CloseTableForm, OrderForm
@@ -9,11 +9,9 @@ bp = Blueprint('orders', __name__, url_prefix='')
 @bp.route('/')
 @login_required
 def index():
-    #menu = Menu.query.all()
     menu_items = MenuItem.query.all()
     employees = Employee.query.all()
     tables = Table.query.all()
-    #orders = Order.query.all()
     order_details = OrderDetail.query.all()
 
     return render_template('orders.html', tables=tables, employees=employees, menu_items=menu_items, order_details=order_details)
@@ -25,7 +23,6 @@ def assign():
 
     if assign_form.validate_on_submit():
         handle_assign(assign_form)
-        redirect('/')
 
     return render_template('assign.html', assign=assign_form, title='Assign Employee')
 
@@ -35,7 +32,6 @@ def close():
 
     if close_form.validate_on_submit():
         handle_close(close_form)
-        redirect('/')
 
     return render_template('close.html', close=close_form, title='Close Table')
 
@@ -45,7 +41,6 @@ def order():
 
     if order_form.validate_on_submit():
         handle_order(order_form)
-        redirect('/')
 
     return render_template('order_form.html', order=order_form, title='Order Form')
 
